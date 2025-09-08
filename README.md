@@ -1,12 +1,13 @@
-# 🚀 Lab - Site Estático na AWS S3
+# 🚀 Lab - Site Estático na AWS S3 com CloudFront e HTTPS
 
-Este é meu primeiro laboratório prático em **Cloud Computing**, onde hospedei um **site estático** utilizando o serviço **Amazon S3**.  
-O objetivo é demonstrar conhecimentos básicos de armazenamento e hosting na nuvem.
+Este é meu primeiro laboratório prático em Cloud Computing, onde hospedei um site estático utilizando Amazon S3 e distribuí com CloudFront para HTTPS e melhor performance.
+O objetivo é demonstrar conhecimentos básicos de armazenamento, hosting e distribuição de conteúdo na nuvem.
 
 ---
 
 ## 🛠️ Serviços Utilizados
 - **Amazon S3** → Para armazenamento dos arquivos do site.
+- **AWS CloudFront** → Distribuição do site com HTTPS.
 - **AWS Management Console** → Para configuração do bucket e permissões.
 
 ---
@@ -16,17 +17,19 @@ O objetivo é demonstrar conhecimentos básicos de armazenamento e hosting na nu
 2. Fazer upload do arquivo `index.html`.
 3. Ativar a opção **Static website hosting** no bucket.
 4. Ajustar as permissões de leitura pública.
-5. Acessar o site pelo link gerado pelo S3.
+5. Criar uma distribuição **CloudFront** apontando para o bucket S3.
+6. Configurar o **Default Root Object** como `index.html`.
+7. Criar uma **Invalidation** no CloudFront (`/*`) para atualizar o cache.
 
 ---
 
 ## 📸 Demonstração
-<img width="1918" height="916" alt="image" src="https://github.com/user-attachments/assets/d780ccaf-bf9b-4110-868a-0c2a118874a8" />
+<img width="1707" height="631" alt="image" src="https://github.com/user-attachments/assets/0a77bd61-a042-475f-a172-21f27bc452bb" />
 
 ---
 
 ## 🔗 **URL do site hospedado:**  
-[👉 Clique aqui para acessar](http://lab01-victor.s3-website-sa-east-1.amazonaws.com/)
+[👉 Clique aqui para acessar](https://d2iiioq566swwz.cloudfront.net/)
 
 ---
 
@@ -34,6 +37,7 @@ O objetivo é demonstrar conhecimentos básicos de armazenamento e hosting na nu
 - Como criar e configurar um bucket no S3.
 - Diferença entre **armazenamento de objetos** e **hospedagem web tradicional**.
 - Deploy de site estático sem servidor.
+- Distribuição de conteúdo via CloudFront com HTTPS e cache.
 
 ---
 
