@@ -1,0 +1,41 @@
+name: 🚀 Deploy site estático p/ S3 + Invalidate CloudFront
+
+on:
+  push:
+    branches: [ "main" ]   # altere se usar outra branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v5
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Install AWS CLI (se necessário)
+        run: |
+          python3 -m pip install --upgrade pip
+          pip3 install awscli
+
+      - name: Sync site to S3
+        run: |
+          # sincroniza o diretório do repositório para o bucket S3
+          # exclui .git e .github e remove arquivos antigos no bucket (--delete)
+          aws s3 sync . s3://${{ secrets.S3_BUCKET }} \
+            --delete \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude "README.md"
+
+      - name: Create CloudFront invalidation
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.DISTRIBUTION_ID }} \
+            --paths "/*"
